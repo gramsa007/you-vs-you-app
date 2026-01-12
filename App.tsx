@@ -342,6 +342,7 @@ const WorkoutBuilderModal = ({ onClose, onSave, templates, onSaveTemplate, onDel
   const handleSave = () => {
     if (!title) return alert("Bitte Titel eingeben");
     
+    // Konvertierung in das App-Datenformat
     const newWorkout = {
       id: Date.now(),
       title: title,
@@ -365,7 +366,7 @@ const WorkoutBuilderModal = ({ onClose, onSave, templates, onSaveTemplate, onDel
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-md animate-in fade-in">
       <div className="bg-white rounded-3xl w-full max-w-md max-h-[85vh] flex flex-col shadow-2xl animate-in zoom-in-95">
         <div className="bg-gradient-to-r from-blue-600 to-indigo-600 p-4 text-white flex justify-between items-center rounded-t-3xl shrink-0">
           <h2 className="font-bold text-lg flex items-center gap-2"><Edit size={20}/> Plan erstellen</h2>
@@ -373,6 +374,8 @@ const WorkoutBuilderModal = ({ onClose, onSave, templates, onSaveTemplate, onDel
         </div>
         
         <div className="p-4 overflow-y-auto flex-1 space-y-4">
+          
+          {/* TEMPLATE SECTION */}
           <div className="bg-blue-50 p-3 rounded-xl border border-blue-100 flex flex-col gap-2">
               <label className="text-[10px] font-bold text-blue-400 uppercase flex items-center gap-1"><LayoutTemplate size={10}/> Vorlage laden</label>
               <div className="flex gap-2">
@@ -386,6 +389,7 @@ const WorkoutBuilderModal = ({ onClose, onSave, templates, onSaveTemplate, onDel
 
           <hr className="border-gray-100"/>
 
+          {/* Basis Daten */}
           <div className="space-y-3">
             <div>
               <label className="text-[10px] font-bold text-gray-400 uppercase">Workout Name</label>
@@ -405,6 +409,7 @@ const WorkoutBuilderModal = ({ onClose, onSave, templates, onSaveTemplate, onDel
 
           <hr className="border-gray-100"/>
 
+          {/* Übungsliste */}
           <div className="space-y-3">
             {exercises.map((ex, i) => (
               <div key={i} className="bg-gray-50 p-3 rounded-xl border border-gray-200 relative">
@@ -1159,43 +1164,7 @@ function App() {
                   <div className="bg-white p-4 rounded-3xl shadow-md border border-gray-100 flex flex-col justify-center items-center"><Trophy className="text-yellow-500 mb-2 drop-shadow-sm" size={28} /><span className="text-3xl font-black text-gray-900 leading-none">{getStats().total}</span><span className="text-[10px] text-gray-400 uppercase font-bold tracking-wider mt-1">Total Workouts</span></div>
                   <div className="bg-white p-4 rounded-3xl shadow-md border border-gray-100 flex flex-col justify-center items-center"><Flame className="text-blue-500 mb-2 drop-shadow-sm" size={28} /><span className="text-3xl font-black text-gray-900 leading-none">{getStreakStats().currentStreak}</span><span className="text-[10px] text-gray-400 uppercase font-bold tracking-wider mt-1">Tage Streak</span></div>
                 </div>
-                
-                <div className="bg-slate-900 rounded-3xl p-6 relative overflow-hidden text-white shadow-xl flex flex-col items-center justify-between gap-3 h-auto">
-                  <Cloud className="absolute -left-4 -bottom-4 text-white opacity-5 w-32 h-32" />
-                  <div className="relative z-10 w-full flex justify-between items-center">
-                    <div><div className="flex items-center gap-2 mb-1"><Database size={20} className="text-blue-400" /><h3 className="font-bold text-lg">Cloud Sync</h3></div><p className="text-xs text-gray-400">Backup & Restore</p></div>
-                    <div className="flex gap-2">
-                      <button onClick={handleExport} className="p-3 bg-blue-600 rounded-xl hover:bg-blue-500 transition-colors shadow-lg shadow-blue-900/50" title="Backup Datei erstellen"><Download size={20} /></button>
-                      <div className="relative"><input type="file" accept=".json" ref={fileInputRef} onChange={handleImport} className="hidden" /><button onClick={() => fileInputRef.current?.click()} className="p-3 bg-gray-700 rounded-xl hover:bg-gray-600 transition-colors border border-gray-600" title="Datei importieren"><Upload size={20} /></button></div>
-                      <button onClick={() => setShowPastePlanModal(true)} className="p-3 bg-emerald-600 rounded-xl hover:bg-emerald-500 transition-colors shadow-lg shadow-emerald-900/50" title="Plan Text einfügen"><ClipboardCheck size={20} /></button>
-                    </div>
-                  </div>
-                  <button onClick={() => setShowCustomLogModal(true)} className="relative z-10 w-full bg-white/10 hover:bg-white/20 text-white font-bold py-3 rounded-xl flex items-center justify-center gap-2 transition-colors border border-white/10">
-                    <PlusCircle size={18} /> Freies Training eintragen
-                  </button>
-                </div>
-
-                <div onClick={() => { setBuilderInitialData(null); setShowBuilderModal(true); }} className="bg-white rounded-3xl p-6 shadow-sm border border-gray-100 flex items-center justify-between cursor-pointer hover:bg-gray-50 transition-colors">
-                    <div className="flex items-center gap-3">
-                        <div className="bg-purple-100 text-purple-600 p-2 rounded-xl"><Edit size={20} /></div>
-                        <div>
-                            <h3 className="font-bold text-lg text-gray-900">Manueller Plan</h3>
-                            <p className="text-xs text-gray-500">Eigene Workouts erstellen</p>
-                        </div>
-                    </div>
-                    <ChevronRight className="text-gray-300" />
-                </div>
-
-                <div onClick={() => setActivePromptModal('warmup')} className="bg-white rounded-3xl p-6 shadow-sm border border-gray-100 flex items-center justify-between cursor-pointer hover:bg-gray-50 transition-colors"><div className="flex items-center gap-3"><div className="bg-blue-50 text-blue-600 p-2 rounded-xl"><Zap size={20} /></div><div><h3 className="font-bold text-lg text-gray-900">Warm-up Prompt</h3><p className="text-xs text-gray-500">Aufwärm-Routine anpassen</p></div></div><ChevronRight className="text-gray-300" /></div>
-
-                <div onClick={() => setActivePromptModal('cooldown')} className="bg-white rounded-3xl p-6 shadow-sm border border-gray-100 flex items-center justify-between cursor-pointer hover:bg-gray-50 transition-colors"><div className="flex items-center gap-3"><div className="bg-teal-50 text-teal-600 p-2 rounded-xl"><Wind size={20} /></div><div><h3 className="font-bold text-lg text-gray-900">Mein Cool Down</h3><p className="text-xs text-gray-500">Regeneration & Stretching</p></div></div><ChevronRight className="text-gray-300" /></div>
-
-                <div onClick={() => setShowEquipmentModal(true)} className="bg-white rounded-3xl p-6 shadow-sm border border-gray-100 flex items-center justify-between cursor-pointer hover:bg-gray-50 transition-colors"><div className="flex items-center gap-3"><div className="bg-indigo-50 text-indigo-600 p-2 rounded-xl"><Package size={20} /></div><div><h3 className="font-bold text-lg text-gray-900">Mein Equipment</h3><p className="text-xs text-gray-500">Verfügbares Trainingsgerät</p></div></div><ChevronRight className="text-gray-300" /></div>
-
-                <div onClick={() => setActivePromptModal('system')} className="bg-white rounded-3xl p-6 shadow-sm border border-gray-100 flex items-center justify-between cursor-pointer hover:bg-gray-50 transition-colors"><div className="flex items-center gap-3"><div className="bg-blue-100 text-blue-600 p-2 rounded-xl"><FileText size={20} /></div><div><h3 className="font-bold text-lg text-gray-900">Coach Philosophie</h3><p className="text-xs text-gray-500">Identität & Regeln definieren</p></div></div><ChevronRight className="text-gray-300" /></div>
-
                 <div onClick={() => setActivePromptModal('plan')} className="bg-white rounded-3xl p-6 shadow-sm border border-gray-100 flex items-center justify-between cursor-pointer hover:bg-gray-50 transition-colors"><div className="flex items-center gap-3"><div className="bg-blue-50 text-blue-600 p-2 rounded-xl"><Sparkles size={20} /></div><div><h3 className="font-bold text-lg text-gray-900">Neuer 4-Wochen-Plan</h3><p className="text-xs text-gray-500">Erstelle einen neuen Plan mit KI</p></div></div><div className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-3 rounded-xl shadow-md"><ChevronRight size={20} /></div></div>
-                
                 <div className="pt-6 pb-4 flex flex-col gap-3 items-center border-t border-gray-200 mt-4"><button onClick={handleReset} className="text-red-400 text-xs font-bold flex items-center gap-1 hover:text-red-600 transition-colors"><Trash2 size={12} /> Alles zurücksetzen</button></div>
               </div>
             </>
@@ -1211,7 +1180,7 @@ function App() {
                 <div className="flex gap-2 bg-blue-800/30 p-1 rounded-xl backdrop-blur-sm">{[1, 2, 3, 4].map((week) => (<button key={week} onClick={() => setActiveWeek(week)} className={`flex-1 py-2 text-sm font-bold rounded-lg transition-all ${activeWeek === week ? 'bg-white text-blue-700 shadow-md' : 'text-blue-100 hover:bg-white/10'}`}>W{week}</button>))}</div>
               </header>
               <main className="p-4 space-y-4 -mt-2">
-                {visibleWorkouts.length > 0 ? (visibleWorkouts.map((workout: any) => { const isCompleted = isWorkoutCompleted(workout.id); return (<div key={workout.id} onClick={() => startWorkout(workout.id)} className={`relative overflow-hidden group p-5 rounded-2xl shadow-sm border transition-all ${isCompleted ? 'bg-blue-50/50 border-blue-200' : 'bg-white border-gray-100 hover:shadow-md'} border-l-4 ${workout.color}`}><div className="flex justify-between items-start"><div className="flex-1"><div className="flex gap-2 mb-2"><span className="text-[10px] bg-blue-50 text-blue-600 px-2 py-0.5 rounded flex items-center gap-1"><Clock size={10} /> {workout.duration}</span><span className="text-[10px] bg-blue-50 text-blue-600 px-2 py-0.5 rounded flex items-center gap-1"><Flame size={10} /> {workout.focus}</span></div><h3 className={`text-xl font-bold mb-1 ${isCompleted ? 'text-blue-900' : 'text-gray-900'}`}>{workout.title}</h3></div><div className="flex flex-col items-end gap-2 ml-4">{isCompleted && (<div className="text-emerald-500 p-1"><CheckSquare size={20} /></div>)}</div></div></div>); })) : (<div className="text-center py-10 text-gray-400"><p>Keine Workouts für Woche {activeWeek}.</p></div>)}
+                {visibleWorkouts.map((workout: any) => { const isCompleted = isWorkoutCompleted(workout.id); return (<div key={workout.id} onClick={() => startWorkout(workout.id)} className={`relative overflow-hidden group p-5 rounded-2xl shadow-sm border transition-all ${isCompleted ? 'bg-blue-50/50 border-blue-200' : 'bg-white border-gray-100 hover:shadow-md'} border-l-4 ${workout.color}`}><div className="flex justify-between items-start"><div className="flex-1"><div className="flex gap-2 mb-2"><span className="text-[10px] bg-blue-50 text-blue-600 px-2 py-0.5 rounded flex items-center gap-1"><Clock size={10} /> {workout.duration}</span><span className="text-[10px] bg-blue-50 text-blue-600 px-2 py-0.5 rounded flex items-center gap-1"><Flame size={10} /> {workout.focus}</span></div><h3 className={`text-xl font-bold mb-1 ${isCompleted ? 'text-blue-900' : 'text-gray-900'}`}>{workout.title}</h3></div><div className="flex flex-col items-end gap-2 ml-4">{isCompleted && (<div className="text-emerald-500 p-1"><CheckSquare size={20} /></div>)}</div></div></div>); })}
               </main>
             </>
           )}
