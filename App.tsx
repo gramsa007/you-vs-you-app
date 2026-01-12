@@ -301,7 +301,6 @@ const PastePlanModal = ({ onClose, onImport }: any) => {
   );
 };
 
-// --- UPDATE: WORKOUT BUILDER MIT VORLAGEN ---
 const WorkoutBuilderModal = ({ onClose, onSave, templates, onSaveTemplate, onDeleteTemplate, initialData }: any) => {
   const [title, setTitle] = useState(initialData?.title || "");
   const [week, setWeek] = useState(initialData?.week || 1);
@@ -343,7 +342,6 @@ const WorkoutBuilderModal = ({ onClose, onSave, templates, onSaveTemplate, onDel
   const handleSave = () => {
     if (!title) return alert("Bitte Titel eingeben");
     
-    // Konvertierung in das App-Datenformat
     const newWorkout = {
       id: Date.now(),
       title: title,
@@ -367,7 +365,7 @@ const WorkoutBuilderModal = ({ onClose, onSave, templates, onSaveTemplate, onDel
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-md animate-in fade-in">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in">
       <div className="bg-white rounded-3xl w-full max-w-md max-h-[85vh] flex flex-col shadow-2xl animate-in zoom-in-95">
         <div className="bg-gradient-to-r from-blue-600 to-indigo-600 p-4 text-white flex justify-between items-center rounded-t-3xl shrink-0">
           <h2 className="font-bold text-lg flex items-center gap-2"><Edit size={20}/> Plan erstellen</h2>
@@ -375,8 +373,6 @@ const WorkoutBuilderModal = ({ onClose, onSave, templates, onSaveTemplate, onDel
         </div>
         
         <div className="p-4 overflow-y-auto flex-1 space-y-4">
-          
-          {/* TEMPLATE SECTION */}
           <div className="bg-blue-50 p-3 rounded-xl border border-blue-100 flex flex-col gap-2">
               <label className="text-[10px] font-bold text-blue-400 uppercase flex items-center gap-1"><LayoutTemplate size={10}/> Vorlage laden</label>
               <div className="flex gap-2">
@@ -390,7 +386,6 @@ const WorkoutBuilderModal = ({ onClose, onSave, templates, onSaveTemplate, onDel
 
           <hr className="border-gray-100"/>
 
-          {/* Basis Daten */}
           <div className="space-y-3">
             <div>
               <label className="text-[10px] font-bold text-gray-400 uppercase">Workout Name</label>
@@ -410,7 +405,6 @@ const WorkoutBuilderModal = ({ onClose, onSave, templates, onSaveTemplate, onDel
 
           <hr className="border-gray-100"/>
 
-          {/* Übungsliste */}
           <div className="space-y-3">
             {exercises.map((ex, i) => (
               <div key={i} className="bg-gray-50 p-3 rounded-xl border border-gray-200 relative">
