@@ -231,7 +231,7 @@ const EquipmentModal = ({ onClose, equipment, onSave }: any) => {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200">
       <div className="bg-white rounded-3xl shadow-2xl max-w-lg w-full flex flex-col max-h-[80vh] animate-in zoom-in-95 duration-200 relative overflow-hidden">
-        <div className="bg-gradient-to-r from-orange-500 to-red-600 p-6 flex justify-between items-center text-white shrink-0">
+        <div className="bg-gradient-to-r from-blue-600 to-indigo-700 p-6 flex justify-between items-center text-white shrink-0">
           <h3 className="text-xl font-bold flex items-center gap-2"><Package size={20} /> Mein Equipment</h3>
           <div className="flex items-center gap-2">
             {!isEditing && (
@@ -1114,7 +1114,7 @@ function App() {
 
           {analysisExercise && <ExerciseAnalysisModal onClose={() => setAnalysisExercise(null)} exerciseName={analysisExercise} history={history} />}
 
-          <div className="bg-gradient-to-r from-orange-500 to-red-600 text-white py-2 px-4 sticky top-0 z-10 shadow-lg">
+          <div className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-2 px-4 sticky top-0 z-10 shadow-lg">
             <div className="flex justify-between items-center">
               <button onClick={handleBackRequest} className="flex items-center gap-1 text-orange-200 hover:text-white transition-colors">
                 <ArrowLeft size={18} /><span className="text-xs font-medium">Zurück</span>
@@ -1186,7 +1186,7 @@ function App() {
         {analysisExercise && <ExerciseAnalysisModal onClose={() => setAnalysisExercise(null)} exerciseName={analysisExercise} history={history} />}
 
         {activePromptModal === 'system' && <PromptModal onClose={() => setActivePromptModal(null)} title="Coach Philosophie" icon={FileText} colorClass="bg-gradient-to-r from-blue-600 to-indigo-700" currentPrompt={systemPrompt} onSave={handleSaveSystemPrompt} />}
-        {activePromptModal === 'warmup' && <PromptModal onClose={() => setActivePromptModal(null)} title="Warm-up Prompt" icon={Zap} colorClass="bg-gradient-to-r from-orange-500 to-red-600" currentPrompt={warmupPrompt} onSave={handleSaveWarmupPrompt} />}
+        {activePromptModal === 'warmup' && <PromptModal onClose={() => setActivePromptModal(null)} title="Warm-up Prompt" icon={Zap} colorClass="bg-gradient-to-r from-blue-600 to-indigo-700" currentPrompt={warmupPrompt} onSave={handleSaveWarmupPrompt} />}
         {activePromptModal === 'cooldown' && <PromptModal onClose={() => setActivePromptModal(null)} title="Mein Cool Down" icon={Wind} colorClass="bg-gradient-to-r from-teal-500 to-cyan-600" currentPrompt={cooldownPrompt} onSave={handleSaveCooldownPrompt} description="Definiere hier deinen Cool Down Ablauf:" />}
 
         {/* HIER IST DER MODAL FÜR DEN PLAN GENERATOR (wird vom Button unten aufgerufen) */}
@@ -1218,7 +1218,7 @@ function App() {
 
           {activeTab === 'profile' && (
             <>
-              <header className="bg-gradient-to-r from-orange-500 to-red-600 p-6 pb-12 text-white shadow-lg rounded-b-3xl">
+              <header className="bg-gradient-to-r from-blue-600 to-indigo-700 p-6 pb-12 text-white shadow-lg rounded-b-3xl">
                 <div className="flex justify-center items-center">
                   <div>
                     <h1 className="text-5xl font-bold italic tracking-tighter text-white text-center transform -skew-x-6">
@@ -1282,7 +1282,7 @@ function App() {
 
           {activeTab === 'training' && (
             <>
-              <header className="bg-gradient-to-r from-orange-500 to-red-600 p-6 pb-6 shadow-lg text-white rounded-b-3xl">
+              <header className="bg-gradient-to-r from-blue-600 to-indigo-700 p-6 pb-6 shadow-lg text-white rounded-b-3xl">
                 <div className="mb-6 text-center">
                     <h1 className="text-2xl font-black italic text-white uppercase tracking-widest border-b-2 border-orange-200 pb-2 inline-block shadow-sm">
                         Stay Focused • Season 2026
@@ -1298,7 +1298,7 @@ function App() {
 
           {activeTab === 'history' && !selectedHistoryEntry && (
             <div className="pb-0">
-              <header className="bg-gradient-to-r from-orange-500 to-red-600 p-6 pb-12 text-white shadow-lg rounded-b-3xl">
+              <header className="bg-gradient-to-r from-blue-600 to-indigo-700 p-6 pb-12 text-white shadow-lg rounded-b-3xl">
                 <div className="flex justify-between items-center mb-1">
                   <div><h1 className="text-2xl font-black flex items-center gap-2">Verlauf <History className="text-orange-300" size={24} /></h1><p className="text-orange-100 text-sm font-medium mt-1">Deine Trainings-Historie</p></div>
                   <button onClick={handleCSVExport} className="bg-white/10 hover:bg-white/20 p-2 rounded-xl text-white transition-colors" title="Export als CSV Tabelle"><FileSpreadsheet size={24} /></button>
