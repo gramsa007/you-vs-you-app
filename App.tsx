@@ -1222,7 +1222,7 @@ function App() {
                 <div className="flex justify-center items-center">
                   <div>
                     <h1 className="text-5xl font-bold italic tracking-tighter text-white text-center transform -skew-x-6">
-                      Max on Fire
+                      You vs You
                     </h1>
                   </div>
                 </div>
